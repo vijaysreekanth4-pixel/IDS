@@ -1,0 +1,227 @@
+{
+  "generated_at": "2026-09-17T08:33:40.705536Z",
+  "summary": {
+    "total_devices": 5,
+    "healthy_devices": 1,
+    "failed_devices": 4,
+    "degraded_devices": 0,
+    "total_events": 26,
+    "parse_errors": 3
+  },
+  "devices": [
+    {
+      "device_id": "DEVICE-02",
+      "status": "FAILED",
+      "event_count": 7,
+      "first_seen": "2026-09-01T10:01:01",
+      "last_seen": "2026-09-01T10:01:07",
+      "failure_type": "SESSION_ESTABLISHMENT",
+      "retry_count": 2,
+      "confidence": 0.9,
+      "probable_root_cause": "Session establishment repeatedly failed after successful authentication. Likely cause: misconfigured session parameters or a resource exhaustion on the server side.",
+      "supporting_evidence": [
+        "Event 'SESSION_START' reported a failure status at 2026-09-01 10:01:03",
+        "RETRY event appeared 2 times (threshold: 2)",
+        "Event 'SESSION_START' failed 3 times"
+      ],
+      "recommendation": [
+        "Check session establishment configuration on the server side",
+        "Review server-side resource limits (file descriptors, connection pool size)",
+        "Inspect component logs around the failure timestamp for stack traces",
+        "Verify that the authentication token has not expired before session creation",
+        "Investigate repeated session establishment failures for patterns (time-of-day, load)"
+      ],
+      "failures": [
+        {
+          "failure_type": "STATUS_FAILURE",
+          "failure_event": "SESSION_START",
+          "retry_count": 0,
+          "failed_at": "2026-09-01T10:01:03",
+          "delay_seconds": null,
+          "missing_events": [],
+          "unexpected_sequence": null
+        },
+        {
+          "failure_type": "EXCESSIVE_RETRIES",
+          "failure_event": "RETRY",
+          "retry_count": 2,
+          "failed_at": "2026-09-01T10:01:04",
+          "delay_seconds": null,
+          "missing_events": [],
+          "unexpected_sequence": null
+        },
+        {
+          "failure_type": "REPEATED_FAILURE",
+          "failure_event": "SESSION_START",
+          "retry_count": 2,
+          "failed_at": "2026-09-01T10:01:03",
+          "delay_seconds": null,
+          "missing_events": [],
+          "unexpected_sequence": null
+        }
+      ]
+    },
+    {
+      "device_id": "DEVICE-03",
+      "status": "FAILED",
+      "event_count": 6,
+      "first_seen": "2026-09-01T10:02:00",
+      "last_seen": "2026-09-01T10:02:05",
+      "failure_type": "AUTHENTICATION_FAILURE",
+      "retry_count": 2,
+      "confidence": 0.9,
+      "probable_root_cause": "Authentication step failed. Likely cause: invalid credentials, expired certificates, or an unreachable identity provider.",
+      "supporting_evidence": [
+        "Event 'AUTHENTICATION' reported a failure status at 2026-09-01 10:02:01",
+        "RETRY event appeared 2 times (threshold: 2)",
+        "Event 'AUTHENTICATION' failed 3 times"
+      ],
+      "recommendation": [
+        "Verify credentials, API keys, or certificates used by the device",
+        "Check the identity provider / authentication service availability",
+        "Review certificate expiry dates",
+        "Rotate credentials if a breach is suspected",
+        "Enable detailed authentication logging on the server for more context"
+      ],
+      "failures": [
+        {
+          "failure_type": "STATUS_FAILURE",
+          "failure_event": "AUTHENTICATION",
+          "retry_count": 0,
+          "failed_at": "2026-09-01T10:02:01",
+          "delay_seconds": null,
+          "missing_events": [],
+          "unexpected_sequence": null
+        },
+        {
+          "failure_type": "EXCESSIVE_RETRIES",
+          "failure_event": "RETRY",
+          "retry_count": 2,
+          "failed_at": "2026-09-01T10:02:02",
+          "delay_seconds": null,
+          "missing_events": [],
+          "unexpected_sequence": null
+        },
+        {
+          "failure_type": "REPEATED_FAILURE",
+          "failure_event": "AUTHENTICATION",
+          "retry_count": 2,
+          "failed_at": "2026-09-01T10:02:01",
+          "delay_seconds": null,
+          "missing_events": [],
+          "unexpected_sequence": null
+        }
+      ]
+    },
+    {
+      "device_id": "DEVICE-04",
+      "status": "FAILED",
+      "event_count": 4,
+      "first_seen": "2026-09-01T10:03:00",
+      "last_seen": "2026-09-01T10:06:15",
+      "failure_type": "LONG_DELAY",
+      "retry_count": 0,
+      "confidence": 0.6,
+      "probable_root_cause": "Abnormally long delay detected between consecutive events. Likely cause: the device is stalled waiting for an external dependency (database, network, lock) that is slow or unresponsive.",
+      "supporting_evidence": [
+        "Event 'HEARTBEAT' reported a failure status at 2026-09-01 10:06:15",
+        "Long delay of 193.0s before 'HEARTBEAT'"
+      ],
+      "recommendation": [
+        "Profile the slow operation to identify the bottleneck",
+        "Check downstream dependencies (databases, queues, external APIs) for latency",
+        "Review timeout configuration — timeouts may be set too high",
+        "Add distributed tracing to pinpoint where time is spent",
+        "Consider caching or pre-fetching data to reduce blocking wait times"
+      ],
+      "failures": [
+        {
+          "failure_type": "STATUS_FAILURE",
+          "failure_event": "HEARTBEAT",
+          "retry_count": 0,
+          "failed_at": "2026-09-01T10:06:15",
+          "delay_seconds": null,
+          "missing_events": [],
+          "unexpected_sequence": null
+        },
+        {
+          "failure_type": "LONG_DELAY",
+          "failure_event": "HEARTBEAT",
+          "retry_count": 0,
+          "failed_at": "2026-09-01T10:06:15",
+          "delay_seconds": 193.0,
+          "missing_events": [],
+          "unexpected_sequence": null
+        }
+      ]
+    },
+    {
+      "device_id": "DEVICE-05",
+      "status": "FAILED",
+      "event_count": 5,
+      "first_seen": "2026-09-01T10:04:00",
+      "last_seen": "2026-09-01T10:04:06",
+      "failure_type": "CONNECTION_FAILURE",
+      "retry_count": 2,
+      "confidence": 0.88,
+      "probable_root_cause": "Device failed to establish a network connection. Likely cause: network unreachable, firewall rule, or target host is down.",
+      "supporting_evidence": [
+        "Event 'CONNECTION_START' reported a failure status at 2026-09-01 10:04:00",
+        "RETRY event appeared 2 times (threshold: 2)",
+        "Event 'CONNECTION_START' failed 3 times"
+      ],
+      "recommendation": [
+        "Verify network connectivity from the device to the target host",
+        "Check firewall rules and security group configurations",
+        "Confirm the target host is running and accepting connections",
+        "Review DNS resolution for the target hostname",
+        "Check for ISP or VPN issues affecting the network path"
+      ],
+      "failures": [
+        {
+          "failure_type": "STATUS_FAILURE",
+          "failure_event": "CONNECTION_START",
+          "retry_count": 0,
+          "failed_at": "2026-09-01T10:04:00",
+          "delay_seconds": null,
+          "missing_events": [],
+          "unexpected_sequence": null
+        },
+        {
+          "failure_type": "EXCESSIVE_RETRIES",
+          "failure_event": "RETRY",
+          "retry_count": 2,
+          "failed_at": "2026-09-01T10:04:01",
+          "delay_seconds": null,
+          "missing_events": [],
+          "unexpected_sequence": null
+        },
+        {
+          "failure_type": "REPEATED_FAILURE",
+          "failure_event": "CONNECTION_START",
+          "retry_count": 2,
+          "failed_at": "2026-09-01T10:04:00",
+          "delay_seconds": null,
+          "missing_events": [],
+          "unexpected_sequence": null
+        }
+      ]
+    },
+    {
+      "device_id": "DEVICE-01",
+      "status": "HEALTHY",
+      "event_count": 4,
+      "first_seen": "2026-09-01T10:00:01",
+      "last_seen": "2026-09-01T10:00:10",
+      "failure_type": null,
+      "retry_count": 0,
+      "confidence": 1.0,
+      "probable_root_cause": null,
+      "supporting_evidence": [],
+      "recommendation": [
+        "Device is operating normally — no action required."
+      ],
+      "failures": []
+    }
+  ]
+}
