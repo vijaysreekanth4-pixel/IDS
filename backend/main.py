@@ -33,7 +33,7 @@ import ast
 from typing import Any, Dict, Optional
 
 from fastapi import FastAPI, File, HTTPException, Query, UploadFile, BackgroundTasks, Form
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from pydantic import BaseModel
 import smtplib
 from email.mime.text import MIMEText
@@ -308,6 +308,10 @@ async def health_check() -> Dict[str, str]:
     """Liveness probe – always returns 200 OK."""
     return {"status": "ok", "timestamp": datetime.now(timezone.utc).isoformat()}
 
+@app.get("/", include_in_schema=False)
+async def root_redirect():
+    """Redirects the bare URL to the frontend application."""
+    return RedirectResponse(url="/app/login.html")
 
 @app.post("/analyze", response_model=AnalyzeResponse, tags=["Analysis"])
 async def analyze_log_text(request: AnalyzeRequest) -> AnalyzeResponse:
