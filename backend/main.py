@@ -430,8 +430,8 @@ async def update_api_key(req: SettingsRequest):
     # Update environment immediately
     os.environ['GEMINI_API_KEY'] = key
     
-    # Save to .env file
-    env_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
+    # Save to .env file in backend folder
+    env_path = os.path.join(os.path.dirname(__file__), '.env')
     try:
         # Read existing lines
         if os.path.exists(env_path):
